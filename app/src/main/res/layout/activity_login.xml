@@ -41,31 +41,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logowanie" />
-
-        <EditText
-            android:id="@+id/nickReg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:background="@drawable/back"
-            tools:ignore="Autofill,LabelFor" />
-
-        <EditText
-            android:id="@+id/passReg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:background="@drawable/back"
-            tools:ignore="Autofill" />
-
-        <Button
-            android:id="@+id/register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="200dp"
-            android:text="Rejestracja" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

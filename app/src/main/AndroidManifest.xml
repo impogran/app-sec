@@ -8,7 +8,7 @@
         android:label="Aplikacja cybersec"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ProjektAM">
+        android:theme="@style/Theme.projektAM">
         <activity android:name=".FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,9 +17,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ActionActivity"
-            android:label="Szczegóły filmu"
-        android:parentActivityName=".MainActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
         <meta-data
