@@ -29,29 +29,21 @@ class LoginActivity : AppCompatActivity() {
                 val LoginPassword = LoginPassword()
                 LoginPassword.login = login
                 LoginPassword.password = pass
-                val retroInterface = RetrofitClient.getRetroInterface("http://192.168.23.23")
+                val retroInterface = RetrofitClient.getRetroInterface(Constants.URL)
                 val loginCall = retroInterface.login(LoginPassword)
 
                 loginCall.enqueue(object: Callback<JWT> {
                     override fun onResponse(call: Call<JWT>, response: Response<JWT>) {
                         if (response.code() == 200) {
-                            Toast.makeText(applicationContext, response.body()?.JWT ?: "sory nie ma tokenu", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            intent.putExtra("token", response.body()?.JWT ?: "sory nie ma tokenu")
+                            startActivity(intent)
                         }
                     }
                     override fun onFailure(call: Call<JWT>, t: Throwable) {
-                        Toast.makeText(applicationContext, "jakiś error", Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
                     }
                 })
-                /*
-                val thread = Thread(){
-                    runOnUiThread(){
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        this.onPause()
-                    }
-                }
-                thread.start()
-                */
             }
         }
     }
