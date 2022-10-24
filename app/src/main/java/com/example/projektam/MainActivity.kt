@@ -1,4 +1,5 @@
 package com.example.projektam
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ShareActionProvider
@@ -13,6 +14,7 @@ import retrofit2.Callback
 class MainActivity : AppCompatActivity() {
     lateinit var  shareActionProvider: ShareActionProvider
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -55,8 +57,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
             } else if (endpoint.equals("/api/hidden")) {
-                val creepyMessage = "Your reached a hidden part of the application. What are you gonna do?"
-                val hiddenCall = retroInterface.getHidden(creepyMessage);
+                val hiddenCall = retroInterface.getHidden(token)
                 hiddenCall.enqueue(object: Callback<BasicResponse> {
                     override fun onResponse(
                         call: Call<BasicResponse>,
@@ -71,18 +72,15 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
                     }
                 })
-            // /api/hidden <BasicResponse> (coś z rolami)
-            // /api/allEndpoints <List<BasicResponse>>
             } else if (endpoint.equals("/api/allEndpoints")) {
-                val allEndpoints = "1"; //jak pobrać wszystkie?
-                val allEndpointsCall = retroInterface.getAllEndpoints(allEndpoints)
+                val allEndpointsCall = retroInterface.getAllEndpoints(token)
                 allEndpointsCall.enqueue(object : Callback<List<BasicResponse>> {
                     override fun onResponse(
                         call: Call<List<BasicResponse>>,
                         response: Response<List<BasicResponse>>
                     ) {
                         if (response.code() == 200) {
-                            mainTV.setText(response.body()?.allEndpoints?: "no message") //not working???
+                            mainTV.setText(response.body()?.toString()?: "no message")
                         }
                     }
 
@@ -92,7 +90,7 @@ class MainActivity : AppCompatActivity() {
                 })
             }
             else {
-                mainTV.setText("Taki endpoint nie istnieje!")
+                mainTV.setText("Taki endpoint nie istnieje")
             }
         }
     }

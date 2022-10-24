@@ -20,8 +20,8 @@ public interface retroInterface {
     Call<List<User>> getAllUsers(@Header("Authorization") String token);
 
     @GET("/api/hidden")
-    Call<BasicResponse> getHidden(@Body String creepy);
+    Call<BasicResponse> getHidden(@Header("Authorization") String token);
 
     @GET("/api/allEndpoints")
-    Call<List<BasicResponse>> getAllEndpoints(@Header("Authorization") String endpoints);
+    Call<List<BasicResponse>> getAllEndpoints(@Header("Authorization") String token);
 }
